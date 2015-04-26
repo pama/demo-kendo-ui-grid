@@ -1,0 +1,37 @@
+<h1>Kendo-ui Simple with ajax request</h1>
+
+<p>
+  Scrollable, Pageable and sortable (view only).
+</p>
+
+<div id="grid">
+
+</div>
+
+<script>
+  $(function(){
+
+    var users = new kendo.data.DataSource({
+      transport: {
+        read:  {
+          url: "<%= users_path %>",
+          dataType: "json"
+        }
+      }
+    });
+
+    $('#grid').kendoGrid({
+      columns: [
+        { title: "Name", field: "name", template: "<strong>#= name #</strong>" },
+        { title: "Email", field: "email" },
+        { title: "Age", field: "age" }
+      ],
+      dataSource: users,
+      scrollable: true,
+      sortable: {
+        mode: "multiple"
+      }
+    });
+  });
+</script>
+

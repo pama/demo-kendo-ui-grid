@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KendoTest</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="/javascripts/kendo.all.min.js"></script>
+  <link rel="stylesheet" href="/stylesheets/kendo.common.min.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="/stylesheets/kendo.bootstrap.min.css" type="text/css" media="screen">
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="container" role="main">
+  <%= yield %>
+</div>
+
+</body>
+</html>

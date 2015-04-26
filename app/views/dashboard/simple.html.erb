@@ -1,0 +1,30 @@
+<h1>Kendo-ui simple with ajax</h1>
+
+
+<div id="grid">
+
+</div>
+
+<script>
+  $(function(){
+
+    var people = [
+      { name: "Paulo", email: "paulo.abreu@clustercube.com" },
+      { name: "Paulo", email: "paulo.abreu@clustercube.com" },
+      { name: "Paulo", email: "paulo.abreu@clustercube.com" }
+    ];
+
+    $('#grid').kendoGrid({
+      columns: [
+        { title: "Name", field: "name", template: "<strong>#= name #</strong>" },
+        { title: "Email", field: "email" }
+      ],
+      dataSource: {
+        data: people
+      },
+      pageable: {
+        pageSize: 2
+      },
+    });
+  });
+</script>
