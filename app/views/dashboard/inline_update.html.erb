@@ -1,0 +1,92 @@
+<h1>Kendo-ui Simple with ajax request and pagination</h1>
+
+<div id="grid">
+
+</div>
+
+<script>
+  $(function(){
+
+    /**
+     *  By default, kendo-ui sends a query string with schema.models.fields, even if the attributes are not present
+     * */
+
+    var users = new kendo.data.DataSource({
+      transport: {
+        read:  {
+          url: "<%= paginated_users_path %>",
+          dataType: "json"
+        },
+        update: {
+          /**
+           *  we are building a resourceful url
+           *  user_path - PUT	/users/:id(.:format)	users#update
+           * */
+          url: function(options) {
+            return '/users/' + options.id;
+          },
+          dataType: "json",
+          type: "PUT"
+        },
+        /**
+         *  Because rails expect a different parameter structure, we need to map it
+         */
+        parameterMap: function(data, type) {
+          console.log(type);
+          console.log(data);
+          if(type == "read"){
+            return data;
+          }
+          if(type == "update") {
+            // { "user": {"id":1, "name":"paulo", "email":"paulo.abreu@test.com", "age":"40"} }
+            return {user: { id: data.id, name: data.name, email: data.email, age: data.age} };
+          }
+        }
+      },
+      schema: {
+        data: "results",
+        total: "total",
+        /** the row id is required to know which line we have selected */
+        model: {
+          id: "id",
+          fields: {
+            id: { editable: false, nullable: false },
+            name: { editable: true, validation: { required: true } },
+            email: { editable: false },
+            age: { type: "number", validation: { required: true, min: 1, max: 120} },
+          }
+        }
+      },
+      serverPaging: true,
+      page: 1,
+      pageSize: 10
+    });
+
+    $('#grid').kendoGrid({
+      columns: [
+        { title: "Name", field: "name", template: "<strong>#= name #</strong>" },
+        { title: "Email", field: "email" },
+        { title: "Age", field: "age" },
+        { command: ["edit", "destroy"], title: "&nbsp;"}
+      ],
+      dataSource: users,
+      scrollable: true,
+      pageable: {
+        refresh: true,
+        pageSizes: true,
+        buttonCount: 5
+      },
+      /** Update code: inline editable when user click over grid */
+      editable: {
+        mode: "inline"
+      },
+      edit: function(e) {
+        console.log("edit");
+      },
+      update: function(e) {
+        console.log("update");
+      }
+    });
+  });
+</script>
+
