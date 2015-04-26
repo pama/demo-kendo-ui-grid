@@ -2,12 +2,14 @@ Rails.application.routes.draw do
   resources :users do
     collection do
       get :paginated
+      get :paginated_sort
     end
   end
   get 'dashboard/index'
   get 'dashboard/simple'
   get 'dashboard/simple_ajax'
   get 'dashboard/simple_ajax_pagination'
+  get 'dashboard/simple_ajax_pagination_sort'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

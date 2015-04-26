@@ -10,4 +10,7 @@ class DashboardController < ApplicationController
 
   def simple_ajax_pagination
   end
+
+  def simple_ajax_pagination_sort
+  end
 end

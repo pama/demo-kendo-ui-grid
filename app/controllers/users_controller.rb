@@ -66,6 +66,19 @@ class UsersController < ApplicationController
     @total = @users.count #.total_pages
   end
 
+  def paginated_sort
+    @users = User.all
+
+    if(params['sort'])
+      params['sort'].each_value do |item|
+        @users = @users.order(item['field'].to_sym => item['dir'].to_s)
+      end
+    end
+    @users = @users.paginate(page: params[:page], per_page: params[:pageSize])
+    @total = @users.count #.total_pages
+    render :paginated
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

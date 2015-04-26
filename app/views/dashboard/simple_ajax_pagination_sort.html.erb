@@ -10,7 +10,7 @@
     var users = new kendo.data.DataSource({
       transport: {
         read:  {
-          url: "<%= paginated_users_path %>",
+          url: "<%= paginated_sort_users_path %>",
           dataType: "json"
         }
       },
@@ -20,6 +20,7 @@
       },
       // set the second page as the current page
       serverPaging: true,
+      serverSorting: true,
       page: 1,
       pageSize: 10
     });
@@ -36,6 +37,9 @@
         refresh: true,
         pageSizes: true,
         buttonCount: 5
+      },
+      sortable: {
+        mode: "multiple"
       }
     });
   });
