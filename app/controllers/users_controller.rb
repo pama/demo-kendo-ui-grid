@@ -70,7 +70,7 @@ class UsersController < ApplicationController
     @users = User.all
 
     if(params['sort'])
-      params['sort'].each_value do |item|
+      params['sort'].to_unsafe_h.each_value do |item|
         @users = @users.order(item['field'].to_sym => item['dir'].to_s)
       end
     end

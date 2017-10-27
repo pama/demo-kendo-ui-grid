@@ -51,7 +51,7 @@ end
 
 # project gems
 gem 'bootstrap-sass', '~> 3.3.7'
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 
 group :development, :test do
   gem 'faker'
