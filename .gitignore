@@ -25,3 +25,5 @@ public/javascripts/kendo.all.min.js
 public/stylesheets/Bootstrap/*
 public/stylesheets/kendo.bootstrap.min.css
 public/stylesheets/kendo.common.min.css
+
+vendor/*

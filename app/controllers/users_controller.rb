@@ -68,11 +68,10 @@ class UsersController < ApplicationController
 
   def paginated_sort
     @users = User.all
-
     if(params['sort'])
-      params['sort'].each_value do |item|
-        @users = @users.order(item['field'].to_sym => item['dir'].to_s)
-      end
+      field = params.dig("sort", "0", "field")
+      dir = params.dig("sort", "0", "dir")
+      @users = @users.order(field.to_sym => dir.to_s)
     end
     @users = @users.paginate(page: params[:page], per_page: params[:pageSize])
     @total = @users.count #.total_pages
