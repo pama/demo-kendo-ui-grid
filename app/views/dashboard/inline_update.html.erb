@@ -28,6 +28,17 @@
           dataType: "json",
           type: "PUT"
         },
+        destroy: {
+            /**
+             *  we are building a resourceful url
+             *  user_path - DELETE	/users/:id(.:format)	users#update
+             * */
+            url: function(options) {
+                return '/users/' + options.id;
+            },
+            dataType: "json",
+            type: "DELETE"
+        },
         /**
          *  Because rails expect a different parameter structure, we need to map it
          */
@@ -85,6 +96,9 @@
       },
       update: function(e) {
         console.log("update");
+      },
+      destroy: function(e) {
+          console.log("destroy");
       }
     });
   });
